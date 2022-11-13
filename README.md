@@ -31,3 +31,22 @@ Voorbeelden van veel-op-veel relaties zijn de relaties tussen de loper en de wed
 Voorbeelden van 1-op-veel relaties zijn de relaties tussen het algemeen klassement en de lopers en tussen de wedstrijden en de etappes.
 
 Aan de laatste voorwaarde voor minstens 4 blokken van entiteiten is ook voldaan, aangezien er 6 blokken van entiteiten zijn.
+
+
+
+## Deel 2: SQLite database
+Ten opzichte van het originele schema in "Deel 1: Domein model" zijn er een aantal zaken gewijzigd. Hieronder leggen we nog eens kort uit hoe we de tabellen opgebouwd hebben.
+
+In de tabel Wedstrijden houden we algemene informatie bij over de wedstrijden, zoals de WedstrijdId, Afstand, AantalEtappes enzoverder. Hierin staan nog geen specifieke gegevens over de etappes, lopers of personeel. 
+
+In Etappe houden we de EtappeId bij. Deze is uniek voor een specifieke etappe uit een bepaalde wedstrijd. Daarom staat in deze tabel ook de WedstrijdId en het Etappenummer. Bijkomende gegevens zijn BeginLocatie, EindLocatie en EtappeAfstand. 
+
+In Etappe/loper wordt de RugnummerId bijgehouden in combinatie met WedstrijdId, EtappeId en EtappeLooptijd. Hierin houden we bij wat de looptijden zijn voor een loper (met een uniek rugnummer) voor een bepaalde etappe in een bepaalde wedstrijd. 
+
+In Loper staat de specifieke informatie voor elke loper. Aan de hand van de RugnummerId kan persoonlijke informatie over de loper opgevraagd worden. Hierin staat Naam, Leeftijd, Gewicht, TotaleLooptijd en TotaleAfstand. In Loper wordt ook nog de positie in het algemeen klassement bijgehouden. Er is een algemeen klassement voor de snelheid, afstand en tijd. 
+
+In Personeel/wedstrijd wordt de PersoneelId bijgehouden in combinatie met de WedstrijdId en EtappeId. Dit werkt volgens dezelfde analogie als Etappe/loper. Er wordt dus bijgehouden welke PersoneelId bij welke etappes (EtappeId) van welke wedstrijd (WedstrijdId) gewerkt heeft. 
+
+In personeel worden de persoonlijke gegevens bijgehouden van het personeel, analoog aan Loper. Hierin staat de Naam, Functie, of ze al dan niet Vrijwilliger zijn, wat hun LoonPerUur is en LoonNogTeKrijgen. 
+
+In de eerste versie hebben we enkel gewerkt met integers. Een groot aantal hiervan hebben we aangepast naar real, omdat we verwachten dat er met kommagetallen gewerkt zal worden. 
