@@ -35,7 +35,7 @@ Aan de laatste voorwaarde voor minstens 4 blokken van entiteiten is ook voldaan,
 
 
 ## Deel 2: SQLite database
-Ten opzichte van het originele schema in "Deel 1: Domein model" zijn er een aantal zaken gewijzigd. 
+Ten opzichte van het originele schema in "Deel 1: Domein model" zijn er een aantal zaken gewijzigd. Hieronder leggen we nog eens kort uit hoe we de tabellen opgebouwd hebben.
 
 In de tabel Wedstrijden houden we algemene informatie bij over de wedstrijden, zoals de WedstrijdId, Afstand, AantalEtappes enzoverder. Hierin staan nog geen specifieke gegevens over de etappes, lopers of personeel. 
 
