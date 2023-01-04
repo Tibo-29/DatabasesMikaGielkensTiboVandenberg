@@ -1,10 +1,16 @@
-be/kuleuven/vrolijkezweters/controller/ProjectMainController.java
- be.kuleuven.vrolijkezweters.controller.ProjectMainController
+be/kuleuven/vrolijkezweters/databaseConnection.java
+ be.kuleuven.vrolijkezweters.databaseConnection
+be/kuleuven/vrolijkezweters/Wedstrijden.java
+ be.kuleuven.vrolijkezweters.Wedstrijden
 be/kuleuven/vrolijkezweters/controller/BeheerAttachesController.java
  be.kuleuven.vrolijkezweters.controller.BeheerAttachesController
-be/kuleuven/vrolijkezweters/controller/BeheerWedstrijdenController.java
- be.kuleuven.vrolijkezweters.controller.BeheerWedstrijdenController
-be/kuleuven/vrolijkezweters/ProjectMain.java
- be.kuleuven.vrolijkezweters.ProjectMain
 be/kuleuven/vrolijkezweters/controller/BeheerLopersController.java
  be.kuleuven.vrolijkezweters.controller.BeheerLopersController
+be/kuleuven/vrolijkezweters/controller/ProjectMainController.java
+ be.kuleuven.vrolijkezweters.controller.ProjectMainController
+be/kuleuven/vrolijkezweters/ProjectMain.java
+ be.kuleuven.vrolijkezweters.ProjectMain
+be/kuleuven/vrolijkezweters/controller/addWedstrijden.java
+ be.kuleuven.vrolijkezweters.controller.addWedstrijden
+be/kuleuven/vrolijkezweters/controller/BeheerWedstrijdenController.java
+ be.kuleuven.vrolijkezweters.controller.BeheerWedstrijdenController

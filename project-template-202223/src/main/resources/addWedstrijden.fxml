@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TextField fx:id="afstandId" layoutX="212.0" layoutY="42.0" prefHeight="36.0" prefWidth="265.0" />
+      <TextField fx:id="aantalEtappesId" layoutX="212.0" layoutY="94.0" prefHeight="36.0" prefWidth="265.0" />
+      <TextField fx:id="inschrijvingsgeldId" layoutX="212.0" layoutY="145.0" prefHeight="36.0" prefWidth="265.0" />
+      <TextField fx:id="datumId" layoutX="212.0" layoutY="195.0" prefHeight="36.0" prefWidth="265.0" />
+      <TextField fx:id="locatieId" layoutX="212.0" layoutY="243.0" prefHeight="36.0" prefWidth="265.0" />
+      <Text layoutX="85.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Afstand:" />
+      <Text layoutX="85.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Aantal Etappes:" />
+      <Text layoutX="85.0" layoutY="168.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Inschrijvingsgeld:" />
+      <Text layoutX="85.0" layoutY="218.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Datum:" />
+      <Text layoutX="85.0" layoutY="266.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Locatie:" />
+      <Button fx:id="addId" layoutX="281.0" layoutY="321.0" mnemonicParsing="false" text="Add" />
+   </children>
+</AnchorPane>

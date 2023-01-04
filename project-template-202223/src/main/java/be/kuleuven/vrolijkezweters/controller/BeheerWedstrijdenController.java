@@ -1,11 +1,25 @@
 package be.kuleuven.vrolijkezweters.controller;
 
+import be.kuleuven.vrolijkezweters.ProjectMain;
+import be.kuleuven.vrolijkezweters.Wedstrijden;
+import be.kuleuven.vrolijkezweters.databaseConnection;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.WeakSetChangeListener;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.jdbi.v3.core.Handle;
+import org.jdbi.v3.core.Jdbi;
+import org.jdbi.v3.core.statement.Query;
+
+import java.util.List;
+import java.util.Map;
 
 public class BeheerWedstrijdenController {
 
@@ -39,12 +53,16 @@ public class BeheerWedstrijdenController {
     }
 
     private void initTable() {
+
         tblConfigs.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         tblConfigs.getColumns().clear();
 
-        // TODO verwijderen en "echte data" toevoegen!
+        databaseConnection databaseConnection = new databaseConnection();
+        Handle handle = databaseConnection.getJdbi().open();
+        List<Wedstrijden> list = handle.createQuery("SELECT * FROM wedstrijden").mapToBean(Wedstrijden.class).list();
+
         int colIndex = 0;
-        for(var colName : new String[]{"Naam", "Categorie", "Prijs", "Kilometers"}) {
+        for(var colName : new String[]{"Naam", "Afstand", "Aantal etappes", "Inschrijvingsgeld", "Datum", "Locatie"}) {
             TableColumn<ObservableList<String>, String> col = new TableColumn<>(colName);
             final int finalColIndex = colIndex;
             col.setCellValueFactory(f -> new ReadOnlyObjectWrapper<>(f.getValue().get(finalColIndex)));
@@ -52,14 +70,31 @@ public class BeheerWedstrijdenController {
             colIndex++;
         }
 
+        for(int i = 0; i < list.size(); i++) {
+            Wedstrijden wedstrijden = list.get(i);
 
-        for(int i = 0; i < 10; i++) {
-
-            tblConfigs.getItems().add(FXCollections.observableArrayList("Kleine wedstrijd " + i, "categorie 1", i*10 + "", i * 33 + ""));
+            tblConfigs.getItems().add(FXCollections.observableArrayList(wedstrijden.getWedstijdId() + "", wedstrijden.getAfstand()+ "", wedstrijden.getAantalEtappes()+ "", wedstrijden.getInschrijvingsgeld()+ "", wedstrijden.getDatum() + "", wedstrijden.getLocatie() + ""));
         }
+        handle.close();
     }
 
     private void addNewRow() {
+
+        var resourceName = "addWedstrijden.fxml";
+        try {
+            var stage = new Stage();
+            var root = (AnchorPane) FXMLLoader.load(getClass().getClassLoader().getResource("addWedstrijden.fxml"));
+            var scene = new Scene(root);
+            stage.setScene(scene);
+            stage.setTitle("Add wedstrijd");
+            stage.initOwner(ProjectMain.getRootStage());
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.show();
+
+        } catch (Exception e) {
+            throw new RuntimeException("Kan beheerscherm " + resourceName + " niet vinden", e);
+        }
+
     }
 
     private void deleteCurrentRow() {
