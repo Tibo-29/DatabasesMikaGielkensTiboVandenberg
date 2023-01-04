@@ -2,19 +2,12 @@ package be.kuleuven.vrolijkezweters.controller;
 
 import be.kuleuven.vrolijkezweters.Wedstrijden;
 import be.kuleuven.vrolijkezweters.databaseConnection;
-import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 import org.jdbi.v3.core.Handle;
 
-import java.util.List;
-
-import static javafx.scene.input.KeyCode.R;
-
-public class addWedstrijden {
+public class addWedstrijdenController {
 
     @FXML
     private Button addId;
@@ -34,6 +27,7 @@ public class addWedstrijden {
     }
     private void addWedstrijd() {
 
+        int wedstrijdid = 6;
         float afstand = Float.parseFloat(afstandId.getText());
         String aantalEtappes = aantalEtappesId.getText().toString();
         float inschrijvingsgeld = Float.parseFloat(inschrijvingsgeldId.getText());
@@ -43,17 +37,9 @@ public class addWedstrijden {
         databaseConnection databaseConnection = new databaseConnection();
         Handle handle = databaseConnection.getJdbi().open();
 
-        Wedstrijden wedstrijden = new Wedstrijden();
+        handle.execute("INSERT INTO wedstrijden (afstand, aantaletappes, inschrijvingsgeld, datum, locatie) VALUES (?, ?, ?, ?, ?)", afstand, aantalEtappes, inschrijvingsgeld, datum, locatie);
 
-        wedstrijden.setAfstand(afstand);
-        wedstrijden.setAantalEtappes(aantalEtappes);
-        wedstrijden.setInschrijvingsgeld(inschrijvingsgeld);
-        wedstrijden.setDatum(datum);
-        wedstrijden.setLocatie(locatie);
-
-        handle.execute("INSERT INTO wedstrijden VALUES (:afstand, :aantaletappes, :inschrijvingsgeld, :datum, :Locatie)", wedstrijden.getAfstand(), wedstrijden.getAantalEtappes(), wedstrijden.getInschrijvingsgeld(), wedstrijden.getDatum(), wedstrijden.getLocatie());
-
-
+        handle.close();
     }
 
 }
