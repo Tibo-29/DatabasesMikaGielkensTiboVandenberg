@@ -52,6 +52,7 @@ public class BeheerWedstrijdenController {
         });
     }
 
+    public TableView getConfic(){return tblConfigs;}
     private void initTable() {
 
         tblConfigs.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
@@ -94,7 +95,6 @@ public class BeheerWedstrijdenController {
         } catch (Exception e) {
             throw new RuntimeException("Kan beheerscherm " + resourceName + " niet vinden", e);
         }
-
     }
 
     private void deleteCurrentRow() {
