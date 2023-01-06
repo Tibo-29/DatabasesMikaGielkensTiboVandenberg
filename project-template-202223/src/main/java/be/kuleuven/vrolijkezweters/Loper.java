@@ -3,8 +3,8 @@ package be.kuleuven.vrolijkezweters;
 public class Loper {
     private int LoperId;
     private String Naam;
-    private int Leeftijd;
-    private int Gewicht;
+    private String Leeftijd;
+    private String Gewicht;
     private float TotaleLooptijd;
     private float TotaleAfstand;
 
@@ -15,10 +15,10 @@ public class Loper {
     public String getNaam() {
         return Naam;
     }
-    public int getLeeftijd() {
+    public String getLeeftijd() {
         return Leeftijd;
     }
-    public int getGewicht() {
+    public String getGewicht() {
         return Gewicht;
     }
     public float getTotaleLooptijd() {
@@ -30,8 +30,8 @@ public class Loper {
 
     public void setLoperId(int loperId){this.LoperId = loperId;}
     public void setNaam(String naam){this.Naam = naam;}
-    public void setLeeftijd(int leeftijd){this.Leeftijd = leeftijd;}
-    public void setGewicht(int gewicht){this.Gewicht = gewicht;}
+    public void setLeeftijd(String leeftijd){this.Leeftijd = leeftijd;}
+    public void setGewicht(String gewicht){this.Gewicht = gewicht;}
     public void setTotaleLooptijd(float totaleLooptijd){this.TotaleLooptijd = totaleLooptijd;}
     public void setTotaleAfstand(float totaleAfstand){this.TotaleAfstand = totaleAfstand;}
 

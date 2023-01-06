@@ -82,10 +82,10 @@ public class BeheerLopersController {
 
     private void addNewRow() {
 
-        var resourceName = "addLopers.fxml";
+        var resourceName = "addLoper.fxml";
         try {
             var stage = new Stage();
-            var root = (AnchorPane) FXMLLoader.load(getClass().getClassLoader().getResource("beheerlopers.fxml"));
+            var root = (AnchorPane) FXMLLoader.load(getClass().getClassLoader().getResource(resourceName));
             var scene = new Scene(root);
             stage.setScene(scene);
             stage.setTitle("Add loper");
