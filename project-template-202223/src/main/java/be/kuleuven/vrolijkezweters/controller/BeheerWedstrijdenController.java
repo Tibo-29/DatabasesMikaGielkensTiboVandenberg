@@ -98,6 +98,28 @@ public class BeheerWedstrijdenController {
     }
 
     private void deleteCurrentRow() {
+        int geselecteerdeRij = tblConfigs.getSelectionModel().getSelectedIndex();
+        System.out.println("Geselecteerde rij is rij " +geselecteerdeRij);
+
+        databaseConnection databaseConnection = new databaseConnection();
+        Handle handle = databaseConnection.getJdbi().open();
+
+
+        // SQL statement die de WedstrijdId laat zien van geselecteerdeRij
+        String SQL_getWedstrijdId = "SELECT WedstrijdId FROM Wedstrijden LIMIT 1 OFFSET "+geselecteerdeRij;
+        int resultaat = handle.execute(SQL_getWedstrijdId);
+        // Probleem hier is dat er voor elke WedstrijdId -1 wordt teruggegeven, zoals deze println laat zien
+        System.out.println(resultaat);
+
+        // Als de juiste WestrijdId wordt teruggegeven --> rij met deze WedstrijdId verwijderen
+        // Ook problemen met foreign keys wanneer ik rij probeer te verwijderen in DB Browser
+
+
+        /* Iets als dit proberen:
+        String SQL2 = "DELETE FROM Wedstrijden WHERE WedstrijdId IN (SELECT WedstrijdId FROM Wedstrijden LIMIT 1 OFFSET 1)";
+        */
+
+        handle.close();
     }
 
     private void modifyCurrentRow() {
