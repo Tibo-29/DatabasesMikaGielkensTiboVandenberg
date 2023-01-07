@@ -24,5 +24,6 @@
       <Button fx:id="btnModify" layoutX="104.0" layoutY="304.0" mnemonicParsing="false" text="Bewerk" />
       <Button fx:id="btnClose" layoutX="520.0" layoutY="304.0" mnemonicParsing="false" text="Sluiten" />
       <Button fx:id="btnDelete" layoutX="431.0" layoutY="304.0" mnemonicParsing="false" text="Verwijder" />
+      <Button fx:id="btnEtappe" layoutX="476.0" layoutY="9.0" mnemonicParsing="false" text="Etappes beheren" />
    </children>
 </AnchorPane>

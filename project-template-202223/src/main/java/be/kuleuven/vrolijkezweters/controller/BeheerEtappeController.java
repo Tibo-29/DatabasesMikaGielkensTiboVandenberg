@@ -1,5 +1,6 @@
 package be.kuleuven.vrolijkezweters.controller;
 
+import be.kuleuven.vrolijkezweters.Etappe;
 import be.kuleuven.vrolijkezweters.ProjectMain;
 import be.kuleuven.vrolijkezweters.Wedstrijden;
 import be.kuleuven.vrolijkezweters.databaseConnection;
@@ -21,7 +22,7 @@ import org.jdbi.v3.core.statement.Query;
 import java.util.List;
 import java.util.Map;
 
-public class BeheerWedstrijdenController {
+public class BeheerEtappeController {
 
     @FXML
     private Button btnDelete;
@@ -32,9 +33,7 @@ public class BeheerWedstrijdenController {
     @FXML
     private Button btnClose;
     @FXML
-    private Button btnEtappe;
-    @FXML
-    private TableView tblConfigs;
+    private TableView tblConfigs4;
 
     public void initialize() {
         initTable();
@@ -47,51 +46,51 @@ public class BeheerWedstrijdenController {
             verifyOneRowSelected();
             deleteCurrentRow();
         });
-        
+
         btnClose.setOnAction(e -> {
             var stage = (Stage) btnClose.getScene().getWindow();
             stage.close();
         });
 
-        btnEtappe.setOnAction(event -> showEtappeBeheerscherm());
+        //btnEtappe.setOnAction(event -> showEtappeBeheerscherm());
     }
 
-    public TableView getConfic(){return tblConfigs;}
+    public TableView getConfic4(){return tblConfigs4;}
     private void initTable() {
 
-        tblConfigs.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-        tblConfigs.getColumns().clear();
+        tblConfigs4.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        tblConfigs4.getColumns().clear();
 
         databaseConnection databaseConnection = new databaseConnection();
         Handle handle = databaseConnection.getJdbi().open();
-        List<Wedstrijden> list = handle.createQuery("SELECT * FROM wedstrijden").mapToBean(Wedstrijden.class).list();
+        List<Etappe> list = handle.createQuery("SELECT * FROM etappe").mapToBean(Etappe.class).list();
 
         int colIndex = 0;
-        for(var colName : new String[]{"WedstrijdId", "Afstand", "Aantal etappes", "Inschrijvingsgeld", "Datum", "Locatie"}) {
+        for(var colName : new String[]{"EtappeId", "WedstrijdId", "EtappeNummer", "BeginLocatie", "Eindlocatie", "EtappeAfstand"}) {
             TableColumn<ObservableList<String>, String> col = new TableColumn<>(colName);
             final int finalColIndex = colIndex;
             col.setCellValueFactory(f -> new ReadOnlyObjectWrapper<>(f.getValue().get(finalColIndex)));
-            tblConfigs.getColumns().add(col);
+            tblConfigs4.getColumns().add(col);
             colIndex++;
         }
 
         for(int i = 0; i < list.size(); i++) {
-            Wedstrijden wedstrijden = list.get(i);
+            Etappe etappe = list.get(i);
 
-            tblConfigs.getItems().add(FXCollections.observableArrayList(wedstrijden.getWedstijdId() + "", wedstrijden.getAfstand()+ "", wedstrijden.getAantalEtappes()+ "", wedstrijden.getInschrijvingsgeld()+ "", wedstrijden.getDatum() + "", wedstrijden.getLocatie() + ""));
+            tblConfigs4.getItems().add(FXCollections.observableArrayList(etappe.getEtappeId() + "", etappe.getWedstrijdid()+ "", etappe.getEtappeNummer()+ "", etappe.getBeginLocatie()+ "", etappe.getEindLocatie() + "", etappe.getEtappeAfstand() + ""));
         }
         handle.close();
     }
 
     private void addNewRow() {
 
-        var resourceName = "addWedstrijden.fxml";
+        var resourceName = "addEtappe.fxml";
         try {
             var stage = new Stage();
-            var root = (AnchorPane) FXMLLoader.load(getClass().getClassLoader().getResource("addWedstrijden.fxml"));
+            var root = (AnchorPane) FXMLLoader.load(getClass().getClassLoader().getResource(resourceName));
             var scene = new Scene(root);
             stage.setScene(scene);
-            stage.setTitle("Add wedstrijd");
+            stage.setTitle("Add etappe");
             stage.initOwner(ProjectMain.getRootStage());
             stage.initModality(Modality.WINDOW_MODAL);
             stage.show();
@@ -102,7 +101,7 @@ public class BeheerWedstrijdenController {
     }
 
     private void deleteCurrentRow() {
-        int geselecteerdeRij = tblConfigs.getSelectionModel().getSelectedIndex();
+        int geselecteerdeRij = tblConfigs4.getSelectionModel().getSelectedIndex();
         System.out.println("Geselecteerde rij is rij " +geselecteerdeRij);
 
         databaseConnection databaseConnection = new databaseConnection();
@@ -138,25 +137,9 @@ public class BeheerWedstrijdenController {
     }
 
     private void verifyOneRowSelected() {
-        if(tblConfigs.getSelectionModel().getSelectedCells().size() == 0) {
+        if(tblConfigs4.getSelectionModel().getSelectedCells().size() == 0) {
             showAlert("Hela!", "Eerst een record selecteren hé.");
         }
     }
 
-    private void showEtappeBeheerscherm() {
-        var resourceName = "beheeretappes.fxml";
-        try {
-            var stage = new Stage();
-            var root = (AnchorPane) FXMLLoader.load(getClass().getClassLoader().getResource(resourceName));
-            var scene = new Scene(root);
-            stage.setScene(scene);
-            stage.setTitle("Admin Etappe");
-            stage.initOwner(ProjectMain.getRootStage());
-            stage.initModality(Modality.WINDOW_MODAL);
-            stage.show();
-
-        } catch (Exception e) {
-            throw new RuntimeException("Kan beheerscherm " + resourceName + " niet vinden", e);
-        }
-    }
 }

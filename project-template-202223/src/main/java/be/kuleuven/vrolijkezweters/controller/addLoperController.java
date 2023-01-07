@@ -20,10 +20,10 @@ public class addLoperController {
     @FXML
     private TextField TotaleAfstandId;
     @FXML
-    private Button addLoperId;
+    private Button addLoper;
 
     public void initialize() {
-        addLoperId.setOnAction(e -> addLoper());
+        addLoper.setOnAction(e -> addLoper());
     }
     private void addLoper() {
 
