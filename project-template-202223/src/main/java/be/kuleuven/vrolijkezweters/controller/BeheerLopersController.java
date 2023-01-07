@@ -64,6 +64,7 @@ public class BeheerLopersController {
         List<Loper> list = handle.createQuery("SELECT * FROM loper").mapToBean(Loper.class).list();
 
         int colIndex = 0;
+        // Van "LoperId" misschien "Rugnummer" maken?
         for(var colName : new String[]{"LoperId", "Naam", "Leeftijd", "Gewicht", "TotaleLooptijd", "TotaleAfstand"}) {
             TableColumn<ObservableList<String>, String> col = new TableColumn<>(colName);
             final int finalColIndex = colIndex;

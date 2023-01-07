@@ -16,7 +16,7 @@ public class Wedstrijden {
     public String getDatum(){return Datum;}
     public String getLocatie(){return Locatie;}
 
-    public void setWedstijdId(int id) {this.WedstijdId = id;}
+    public void setWedstijdId(int wedstijdId) {this.WedstijdId = wedstijdId;}
     public void setAfstand(float afstand) {this.Afstand = afstand;}
     public void setAantalEtappes(String aantalEtappes) {this.AantalEtappes = aantalEtappes;}
     public void setInschrijvingsgeld(float inschrijvingsgeld) {this.Inschrijvingsgeld = inschrijvingsgeld;}

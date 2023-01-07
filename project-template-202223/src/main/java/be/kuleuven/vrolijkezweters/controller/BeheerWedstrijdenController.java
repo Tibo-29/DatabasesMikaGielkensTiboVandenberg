@@ -63,7 +63,7 @@ public class BeheerWedstrijdenController {
         List<Wedstrijden> list = handle.createQuery("SELECT * FROM wedstrijden").mapToBean(Wedstrijden.class).list();
 
         int colIndex = 0;
-        for(var colName : new String[]{"Naam", "Afstand", "Aantal etappes", "Inschrijvingsgeld", "Datum", "Locatie"}) {
+        for(var colName : new String[]{"WedstrijdId", "Afstand", "Aantal etappes", "Inschrijvingsgeld", "Datum", "Locatie"}) {
             TableColumn<ObservableList<String>, String> col = new TableColumn<>(colName);
             final int finalColIndex = colIndex;
             col.setCellValueFactory(f -> new ReadOnlyObjectWrapper<>(f.getValue().get(finalColIndex)));
