@@ -17,10 +17,13 @@ public class ProjectMainController {
     private Button btnBeheerLopers;
     @FXML
     private Button btnConfigAttaches;
+    @FXML
+    private Button btnPersoneel;
 
     public void initialize() {
         btnBeheerLopers.setOnAction(e -> showBeheerScherm("lopers"));
         btnWedstrijden.setOnAction(e -> showBeheerScherm("wedstrijden"));
+        btnPersoneel.setOnAction(event -> showBeheerScherm("personeel"));
         btnConfigAttaches.setOnAction(e -> showBeheerScherm("attaches"));
     }
 
