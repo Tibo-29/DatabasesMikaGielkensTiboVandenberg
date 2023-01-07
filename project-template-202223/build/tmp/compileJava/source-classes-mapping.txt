@@ -16,9 +16,11 @@ be/kuleuven/vrolijkezweters/controller/addLoperController.java
  be.kuleuven.vrolijkezweters.controller.addLoperController
 be/kuleuven/vrolijkezweters/controller/BeheerWedstrijdenController.java
  be.kuleuven.vrolijkezweters.controller.BeheerWedstrijdenController
-be/kuleuven/vrolijkezweters/controller/BeheerPersoneelController.java
- be.kuleuven.vrolijkezweters.controller.BeheerPersoneelController
+be/kuleuven/vrolijkezweters/controller/addPersoneelController.java
+ be.kuleuven.vrolijkezweters.controller.addPersoneelController
 be/kuleuven/vrolijkezweters/Personeel.java
  be.kuleuven.vrolijkezweters.Personeel
 be/kuleuven/vrolijkezweters/controller/ProjectMainController.java
  be.kuleuven.vrolijkezweters.controller.ProjectMainController
+be/kuleuven/vrolijkezweters/controller/BeheerPersoneelController.java
+ be.kuleuven.vrolijkezweters.controller.BeheerPersoneelController

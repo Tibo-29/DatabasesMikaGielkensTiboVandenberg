@@ -79,7 +79,7 @@ public class BeheerPersoneelController {
 
     private void addNewRow() {
 
-        var resourceName = "beheerpersoneel.fxml";
+        var resourceName = "addPersoneel.fxml";
         try {
             var stage = new Stage();
             var root = (AnchorPane) FXMLLoader.load(getClass().getClassLoader().getResource(resourceName));

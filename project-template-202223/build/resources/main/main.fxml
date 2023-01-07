@@ -14,8 +14,9 @@
       </Text>
       <Button fx:id="btnBeheerLopers" layoutX="50.0" layoutY="82.0" mnemonicParsing="false" text="Beheer Lopers" />
       <Button fx:id="btnWedstrijden" layoutX="224.0" layoutY="81.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="151.0" text="Beheer Wedstrijden" />
-      <Button fx:id="btnConfigAttaches" layoutX="224.0" layoutY="146.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="151.0" text="Beheer Config Attaches" />
       <Button fx:id="btnPersoneel" layoutX="50.0" layoutY="147.0" mnemonicParsing="false" text="Personeel" />
+      <Button fx:id="btnConfigAttaches" layoutX="224.0" layoutY="146.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="151.0" text="Beheer Config Attaches" />
+
 
    </children>
 </AnchorPane>
