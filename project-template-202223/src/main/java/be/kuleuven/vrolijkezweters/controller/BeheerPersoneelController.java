@@ -1,8 +1,6 @@
 package be.kuleuven.vrolijkezweters.controller;
 
-import be.kuleuven.vrolijkezweters.ProjectMain;
-import be.kuleuven.vrolijkezweters.Wedstrijden;
-import be.kuleuven.vrolijkezweters.databaseConnection;
+import be.kuleuven.vrolijkezweters.*;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -21,7 +19,7 @@ import org.jdbi.v3.core.statement.Query;
 import java.util.List;
 import java.util.Map;
 
-public class BeheerWedstrijdenController {
+public class BeheerPersoneelController {
 
     @FXML
     private Button btnDelete;
@@ -32,9 +30,7 @@ public class BeheerWedstrijdenController {
     @FXML
     private Button btnClose;
     @FXML
-    private Button btnEtappe;
-    @FXML
-    private TableView tblConfigs;
+    private TableView tblConfigs3;
 
     public void initialize() {
         initTable();
@@ -47,51 +43,49 @@ public class BeheerWedstrijdenController {
             verifyOneRowSelected();
             deleteCurrentRow();
         });
-        
+
         btnClose.setOnAction(e -> {
             var stage = (Stage) btnClose.getScene().getWindow();
             stage.close();
         });
-
-        btnEtappe.setOnAction(event -> showEtappeBeheerscherm());
     }
 
-    public TableView getConfic(){return tblConfigs;}
+    public TableView getConfic3(){return tblConfigs3;}
     private void initTable() {
 
-        tblConfigs.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-        tblConfigs.getColumns().clear();
+        tblConfigs3.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        tblConfigs3.getColumns().clear();
 
         databaseConnection databaseConnection = new databaseConnection();
         Handle handle = databaseConnection.getJdbi().open();
-        List<Wedstrijden> list = handle.createQuery("SELECT * FROM wedstrijden").mapToBean(Wedstrijden.class).list();
+        List<Personeel> list = handle.createQuery("SELECT * FROM personeel").mapToBean(Personeel.class).list();
 
         int colIndex = 0;
-        for(var colName : new String[]{"WedstrijdId", "Afstand", "Aantal etappes", "Inschrijvingsgeld", "Datum", "Locatie"}) {
+        for(var colName : new String[]{"PersoneelId", "Naam", "Functie", "Vrijwilliger", "LoonPerUur", "LoonNogTeKrijgen"}) {
             TableColumn<ObservableList<String>, String> col = new TableColumn<>(colName);
             final int finalColIndex = colIndex;
             col.setCellValueFactory(f -> new ReadOnlyObjectWrapper<>(f.getValue().get(finalColIndex)));
-            tblConfigs.getColumns().add(col);
+            tblConfigs3.getColumns().add(col);
             colIndex++;
         }
 
         for(int i = 0; i < list.size(); i++) {
-            Wedstrijden wedstrijden = list.get(i);
+            Personeel personeel = list.get(i);
 
-            tblConfigs.getItems().add(FXCollections.observableArrayList(wedstrijden.getWedstijdId() + "", wedstrijden.getAfstand()+ "", wedstrijden.getAantalEtappes()+ "", wedstrijden.getInschrijvingsgeld()+ "", wedstrijden.getDatum() + "", wedstrijden.getLocatie() + ""));
+            tblConfigs3.getItems().add(FXCollections.observableArrayList(personeel.getPersoneelId() + "", personeel.getNaam() + "", personeel.getFunctie()+ "", personeel.getVrijwilliger()+ "", personeel.getLoonPerUur() + "", personeel.getLoonNogTeKrijgen() + ""));
         }
         handle.close();
     }
 
     private void addNewRow() {
 
-        var resourceName = "addWedstrijden.fxml";
+        var resourceName = "addPersoneel.fxml";
         try {
             var stage = new Stage();
-            var root = (AnchorPane) FXMLLoader.load(getClass().getClassLoader().getResource("addWedstrijden.fxml"));
+            var root = (AnchorPane) FXMLLoader.load(getClass().getClassLoader().getResource(resourceName));
             var scene = new Scene(root);
             stage.setScene(scene);
-            stage.setTitle("Add wedstrijd");
+            stage.setTitle("Add personeel");
             stage.initOwner(ProjectMain.getRootStage());
             stage.initModality(Modality.WINDOW_MODAL);
             stage.show();
@@ -102,7 +96,8 @@ public class BeheerWedstrijdenController {
     }
 
     private void deleteCurrentRow() {
-        int geselecteerdeRij = tblConfigs.getSelectionModel().getSelectedIndex();
+        /*
+        int geselecteerdeRij = tblConfigs2.getSelectionModel().getSelectedIndex();
         System.out.println("Geselecteerde rij is rij " +geselecteerdeRij);
 
         databaseConnection databaseConnection = new databaseConnection();
@@ -110,20 +105,13 @@ public class BeheerWedstrijdenController {
 
 
         // SQL statement die de WedstrijdId laat zien van geselecteerdeRij
-        String SQL_getWedstrijdId = "SELECT WedstrijdId FROM Wedstrijden LIMIT 1 OFFSET "+geselecteerdeRij;
-        int resultaat = handle.execute(SQL_getWedstrijdId);
-        // Probleem hier is dat er voor elke WedstrijdId -1 wordt teruggegeven, zoals deze println laat zien
-        System.out.println(resultaat);
+        String SQL_getLoperId = "SELECT LoperId FROM Loper LIMIT 1 OFFSET "+geselecteerdeRij;
+        int resultaat = handle.execute(SQL_getLoperId);
+        // Zelfde probleem als in BeheerWedstrijdenController
 
-        // Als de juiste WestrijdId wordt teruggegeven --> rij met deze WedstrijdId verwijderen
-        // Ook problemen met foreign keys wanneer ik rij probeer te verwijderen in DB Browser
-
-
-        /* Iets als dit proberen:
-        String SQL2 = "DELETE FROM Wedstrijden WHERE WedstrijdId IN (SELECT WedstrijdId FROM Wedstrijden LIMIT 1 OFFSET 1)";
-        */
 
         handle.close();
+        */
     }
 
     private void modifyCurrentRow() {
@@ -138,25 +126,8 @@ public class BeheerWedstrijdenController {
     }
 
     private void verifyOneRowSelected() {
-        if(tblConfigs.getSelectionModel().getSelectedCells().size() == 0) {
+        if(tblConfigs3.getSelectionModel().getSelectedCells().size() == 0) {
             showAlert("Hela!", "Eerst een record selecteren hé.");
-        }
-    }
-
-    private void showEtappeBeheerscherm() {
-        var resourceName = "beheeretappes.fxml";
-        try {
-            var stage = new Stage();
-            var root = (AnchorPane) FXMLLoader.load(getClass().getClassLoader().getResource(resourceName));
-            var scene = new Scene(root);
-            stage.setScene(scene);
-            stage.setTitle("Admin Etappe");
-            stage.initOwner(ProjectMain.getRootStage());
-            stage.initModality(Modality.WINDOW_MODAL);
-            stage.show();
-
-        } catch (Exception e) {
-            throw new RuntimeException("Kan beheerscherm " + resourceName + " niet vinden", e);
         }
     }
 }
