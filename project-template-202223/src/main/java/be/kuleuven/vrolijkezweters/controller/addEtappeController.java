@@ -51,11 +51,6 @@ public class addEtappeController {
         databaseConnection databaseConnection = new databaseConnection();
         Handle handle = databaseConnection.getJdbi().open();
 
-        list = handle.createQuery("SELECT * FROM wedstrijden ORDER BY wedstrijdid DESC LIMIT 1").mapToBean(Wedstrijden.class).list();
-
-        //int wedstrijdId = list.get(0).getWedstrijdId();
-        //int aantalEtappes = Integer.parseInt(list.get(0).getAantalEtappes());
-
         var stage = (Stage) addEtappe.getScene().getWindow();
 
         handle.execute("INSERT INTO etappe (wedstrijdId, etappeNummer, beginLocatie, eindLocatie, etappeAfstand) VALUES (?, ?, ?, ?, ?)", wedstrijdId, etappeNummer, beginLocatie, eindLocatie, etappeAfstand);
