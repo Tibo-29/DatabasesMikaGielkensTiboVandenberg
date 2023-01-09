@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.jdbi.v3.core.Handle;
@@ -25,6 +26,8 @@ public class addEtappeController {
     private TextField EindLocatie;
     @FXML
     private Button addEtappe;
+    @FXML
+    private Text etappeText;
 
     private List<Wedstrijden> list;
 
@@ -53,7 +56,9 @@ public class addEtappeController {
             handle.execute("INSERT INTO etappe (wedstrijdId, etappeNummer, beginLocatie, eindLocatie, etappeAfstand) VALUES (?, ?, ?, ?, ?)", wedstrijdId, i, beginLocatie, eindLocatie, etappeAfstand);
             handle.close();
             stage.close();
+            refreshPreviousScene();
         } else {
+            etappeText.setText("Etappe " + (i + 1));
             i++;
             handle.execute("INSERT INTO etappe (wedstrijdId, etappeNummer, beginLocatie, eindLocatie, etappeAfstand) VALUES (?, ?, ?, ?, ?)", wedstrijdId, i, beginLocatie, eindLocatie, etappeAfstand);
             BeginLocatie.clear();
@@ -64,7 +69,7 @@ public class addEtappeController {
     }
 
     private void refreshPreviousScene(){
-        var resourceName = "beheeretappes.fxml";
+        var resourceName = "beheerwedstrijden.fxml";
         try {
             var stage = new Stage();
             var root = (AnchorPane) FXMLLoader.load(getClass().getClassLoader().getResource(resourceName));
