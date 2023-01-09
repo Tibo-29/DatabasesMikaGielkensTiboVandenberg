@@ -43,7 +43,7 @@ public class addEtappeController {
     private void addEtappe() {
 
         int wedstrijdId = Integer.parseInt(WedstrijdId.getText());
-        float etappeNummer = Integer.parseInt(EtappeNummer.getText());
+        int etappeNummer = Integer.parseInt(EtappeNummer.getText());
         float beginLocatie = Float.parseFloat(BeginLocatie.getText());
         float eindLocatie = Float.parseFloat(EindLocatie.getText());
         float etappeAfstand = eindLocatie-beginLocatie;
