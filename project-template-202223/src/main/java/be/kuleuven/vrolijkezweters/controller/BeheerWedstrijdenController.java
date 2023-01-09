@@ -62,9 +62,6 @@ public class BeheerWedstrijdenController {
         tblConfigs.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         tblConfigs.getColumns().clear();
 
-        /*ObservableList<Wedstrijden> data = tblConfigs.getItems();
-        data.clear();*/
-
         databaseConnection databaseConnection = new databaseConnection();
         Handle handle = databaseConnection.getJdbi().open();
         List<Wedstrijden> list = handle.createQuery("SELECT * FROM wedstrijden").mapToBean(Wedstrijden.class).list();
@@ -105,6 +102,9 @@ public class BeheerWedstrijdenController {
         } catch (Exception e) {
             throw new RuntimeException("Kan beheerscherm " + resourceName + " niet vinden", e);
         }
+
+        var stage = (Stage) btnAdd.getScene().getWindow();
+        stage.close();
     }
 
     private void deleteCurrentRow() {
