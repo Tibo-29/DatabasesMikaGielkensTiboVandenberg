@@ -37,7 +37,6 @@ public class addWedstrijdenController {
         addId.setOnAction(e -> addWedstrijd());
     }
     private void addWedstrijd() {
-        BeheerWedstrijdenController wedstrijdenController = new BeheerWedstrijdenController();
 
         float afstand = Float.parseFloat(afstandId.getText());
         String aantalEtappes = aantalEtappesId.getText().toString();
@@ -59,13 +58,13 @@ public class addWedstrijdenController {
     }
 
     private void refreshPreviousScene(){
-        var resourceName = "beheerwedstrijden.fxml";
+        var resourceName = "addEtappe.fxml";
         try {
             var stage = new Stage();
             var root = (AnchorPane) FXMLLoader.load(getClass().getClassLoader().getResource(resourceName));
             var scene = new Scene(root);
             stage.setScene(scene);
-            stage.setTitle("Admin wedstrijden");
+            stage.setTitle("Admin etappe");
             stage.initOwner(ProjectMain.getRootStage());
             stage.initModality(Modality.WINDOW_MODAL);
             stage.show();
@@ -74,5 +73,4 @@ public class addWedstrijdenController {
             throw new RuntimeException("Kan beheerscherm " + resourceName + " niet vinden", e);
         }
     }
-
 }
