@@ -1,10 +1,21 @@
 package be.kuleuven.vrolijkezweters.controller;
 
+import be.kuleuven.vrolijkezweters.Loper;
+import be.kuleuven.vrolijkezweters.ProjectMain;
 import be.kuleuven.vrolijkezweters.Wedstrijden;
+import be.kuleuven.vrolijkezweters.controller.BeheerWedstrijdenController;
 import be.kuleuven.vrolijkezweters.databaseConnection;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import org.jdbi.v3.core.Handle;
 
 public class addWedstrijdenController {
@@ -26,8 +37,8 @@ public class addWedstrijdenController {
         addId.setOnAction(e -> addWedstrijd());
     }
     private void addWedstrijd() {
+        BeheerWedstrijdenController wedstrijdenController = new BeheerWedstrijdenController();
 
-        int wedstrijdid = 6;
         float afstand = Float.parseFloat(afstandId.getText());
         String aantalEtappes = aantalEtappesId.getText().toString();
         float inschrijvingsgeld = Float.parseFloat(inschrijvingsgeldId.getText());
@@ -40,6 +51,28 @@ public class addWedstrijdenController {
         handle.execute("INSERT INTO wedstrijden (afstand, aantaletappes, inschrijvingsgeld, datum, locatie) VALUES (?, ?, ?, ?, ?)", afstand, aantalEtappes, inschrijvingsgeld, datum, locatie);
 
         handle.close();
+
+        var stage = (Stage) addId.getScene().getWindow();
+        stage.close();
+
+        refreshPreviousScene();
+    }
+
+    private void refreshPreviousScene(){
+        var resourceName = "beheerwedstrijden.fxml";
+        try {
+            var stage = new Stage();
+            var root = (AnchorPane) FXMLLoader.load(getClass().getClassLoader().getResource(resourceName));
+            var scene = new Scene(root);
+            stage.setScene(scene);
+            stage.setTitle("Admin wedstrijden");
+            stage.initOwner(ProjectMain.getRootStage());
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.show();
+
+        } catch (Exception e) {
+            throw new RuntimeException("Kan beheerscherm " + resourceName + " niet vinden", e);
+        }
     }
 
 }

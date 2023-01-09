@@ -17,8 +17,13 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.jdbi.v3.core.Handle;
 import org.jdbi.v3.core.Jdbi;
+import org.jdbi.v3.core.statement.PreparedBatch;
 import org.jdbi.v3.core.statement.Query;
+import org.jdbi.v3.core.statement.StatementBuilder;
 
+import javax.swing.text.Position;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.List;
 import java.util.Map;
 
@@ -34,6 +39,8 @@ public class BeheerLopersController {
     private Button btnClose;
     @FXML
     private TableView tblConfigs2;
+
+    private List<Loper> list;
 
     public void initialize() {
         initTable();
@@ -61,7 +68,7 @@ public class BeheerLopersController {
 
         databaseConnection databaseConnection = new databaseConnection();
         Handle handle = databaseConnection.getJdbi().open();
-        List<Loper> list = handle.createQuery("SELECT * FROM loper").mapToBean(Loper.class).list();
+        list = handle.createQuery("SELECT * FROM loper").mapToBean(Loper.class).list();
 
         int colIndex = 0;
         // Van "LoperId" misschien "Rugnummer" maken?
@@ -97,25 +104,27 @@ public class BeheerLopersController {
         } catch (Exception e) {
             throw new RuntimeException("Kan beheerscherm " + resourceName + " niet vinden", e);
         }
+
+        var stage = (Stage) btnAdd.getScene().getWindow();
+        stage.close();
     }
 
     private void deleteCurrentRow() {
-        /*
+
         int geselecteerdeRij = tblConfigs2.getSelectionModel().getSelectedIndex();
-        System.out.println("Geselecteerde rij is rij " +geselecteerdeRij);
 
         databaseConnection databaseConnection = new databaseConnection();
         Handle handle = databaseConnection.getJdbi().open();
 
+        int id = list.get(geselecteerdeRij).getLoperId();
 
-        // SQL statement die de WedstrijdId laat zien van geselecteerdeRij
-        String SQL_getLoperId = "SELECT LoperId FROM Loper LIMIT 1 OFFSET "+geselecteerdeRij;
-        int resultaat = handle.execute(SQL_getLoperId);
-        // Zelfde probleem als in BeheerWedstrijdenController
-
+        String SQL_deleteLoper = "DELETE from loper WHERE loperid = " + id;
+        handle.execute(SQL_deleteLoper);
 
         handle.close();
-        */
+
+        ObservableList<Loper> data = tblConfigs2.getItems();
+        data.remove(geselecteerdeRij);
     }
 
     private void modifyCurrentRow() {

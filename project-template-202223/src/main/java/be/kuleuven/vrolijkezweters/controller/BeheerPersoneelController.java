@@ -32,6 +32,7 @@ public class BeheerPersoneelController {
     @FXML
     private TableView tblConfigs3;
 
+    private List<Personeel> list;
     public void initialize() {
         initTable();
         btnAdd.setOnAction(e -> addNewRow());
@@ -58,7 +59,7 @@ public class BeheerPersoneelController {
 
         databaseConnection databaseConnection = new databaseConnection();
         Handle handle = databaseConnection.getJdbi().open();
-        List<Personeel> list = handle.createQuery("SELECT * FROM personeel").mapToBean(Personeel.class).list();
+        list = handle.createQuery("SELECT * FROM personeel").mapToBean(Personeel.class).list();
 
         int colIndex = 0;
         for(var colName : new String[]{"PersoneelId", "Naam", "Functie", "Vrijwilliger", "LoonPerUur", "LoonNogTeKrijgen"}) {
@@ -93,25 +94,26 @@ public class BeheerPersoneelController {
         } catch (Exception e) {
             throw new RuntimeException("Kan beheerscherm " + resourceName + " niet vinden", e);
         }
+
+        var stage = (Stage) btnAdd.getScene().getWindow();
+        stage.close();
     }
 
     private void deleteCurrentRow() {
-        /*
-        int geselecteerdeRij = tblConfigs2.getSelectionModel().getSelectedIndex();
-        System.out.println("Geselecteerde rij is rij " +geselecteerdeRij);
+        int geselecteerdeRij = tblConfigs3.getSelectionModel().getSelectedIndex();
 
         databaseConnection databaseConnection = new databaseConnection();
         Handle handle = databaseConnection.getJdbi().open();
 
+        int id = list.get(geselecteerdeRij).getPersoneelId();
 
-        // SQL statement die de WedstrijdId laat zien van geselecteerdeRij
-        String SQL_getLoperId = "SELECT LoperId FROM Loper LIMIT 1 OFFSET "+geselecteerdeRij;
-        int resultaat = handle.execute(SQL_getLoperId);
-        // Zelfde probleem als in BeheerWedstrijdenController
-
+        String SQL_deletePersoneel = "DELETE from personeel WHERE personeelid = " + id;
+        handle.execute(SQL_deletePersoneel);
 
         handle.close();
-        */
+
+        ObservableList<Personeel> data = tblConfigs3.getItems();
+        data.remove(geselecteerdeRij);
     }
 
     private void modifyCurrentRow() {
