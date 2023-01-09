@@ -58,7 +58,7 @@ public class addWedstrijdenController {
     }
 
     private void refreshPreviousScene(){
-        var resourceName = "addEtappe.fxml";
+        var resourceName = "addEtappeMeteenNaWedstrijd.fxml";
         try {
             var stage = new Stage();
             var root = (AnchorPane) FXMLLoader.load(getClass().getClassLoader().getResource(resourceName));

@@ -16,6 +16,8 @@ be/kuleuven/vrolijkezweters/Personeel.java
  be.kuleuven.vrolijkezweters.Personeel
 be/kuleuven/vrolijkezweters/databaseConnection.java
  be.kuleuven.vrolijkezweters.databaseConnection
+be/kuleuven/vrolijkezweters/controller/addEtappeMeteenNaWedstrijdController.java
+ be.kuleuven.vrolijkezweters.controller.addEtappeMeteenNaWedstrijdController
 be/kuleuven/vrolijkezweters/Etappe.java
  be.kuleuven.vrolijkezweters.Etappe
 be/kuleuven/vrolijkezweters/controller/BeheerAttachesController.java

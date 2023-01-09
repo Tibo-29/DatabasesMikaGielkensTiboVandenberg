@@ -113,7 +113,7 @@ public class BeheerWedstrijdenController {
         int id = list.get(geselecteerdeRij).getWedstrijdId();
 
         String SQL_deleteWedstrijd = "DELETE from wedstrijden WHERE wedstrijdid = " + id;
-        String SQL_deleteteEtappes = "DELETE from Etappe WHERE wedstrijdid = " + id;
+        String SQL_deleteteEtappes = "DELETE from etappe WHERE wedstrijdid = " + id;
 
         handle.execute(SQL_deleteteEtappes);
         handle.execute(SQL_deleteWedstrijd);
