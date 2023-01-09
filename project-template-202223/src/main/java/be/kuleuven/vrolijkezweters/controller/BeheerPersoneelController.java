@@ -94,6 +94,9 @@ public class BeheerPersoneelController {
         } catch (Exception e) {
             throw new RuntimeException("Kan beheerscherm " + resourceName + " niet vinden", e);
         }
+
+        var stage = (Stage) btnAdd.getScene().getWindow();
+        stage.close();
     }
 
     private void deleteCurrentRow() {
@@ -104,12 +107,12 @@ public class BeheerPersoneelController {
 
         int id = list.get(geselecteerdeRij).getPersoneelId();
 
-        String SQL_getLoperId = "DELETE from loper WHERE loperid = " + id;
-        handle.execute(SQL_getLoperId);
+        String SQL_deletePersoneel = "DELETE from personeel WHERE personeelid = " + id;
+        handle.execute(SQL_deletePersoneel);
 
         handle.close();
 
-        ObservableList<Loper> data = tblConfigs3.getItems();
+        ObservableList<Personeel> data = tblConfigs3.getItems();
         data.remove(geselecteerdeRij);
     }
 

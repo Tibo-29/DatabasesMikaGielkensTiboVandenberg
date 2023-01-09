@@ -104,6 +104,9 @@ public class BeheerLopersController {
         } catch (Exception e) {
             throw new RuntimeException("Kan beheerscherm " + resourceName + " niet vinden", e);
         }
+
+        var stage = (Stage) btnAdd.getScene().getWindow();
+        stage.close();
     }
 
     private void deleteCurrentRow() {
@@ -115,8 +118,8 @@ public class BeheerLopersController {
 
         int id = list.get(geselecteerdeRij).getLoperId();
 
-        String SQL_getLoperId = "DELETE from loper WHERE loperid = " + id;
-        handle.execute(SQL_getLoperId);
+        String SQL_deleteLoper = "DELETE from loper WHERE loperid = " + id;
+        handle.execute(SQL_deleteLoper);
 
         handle.close();
 

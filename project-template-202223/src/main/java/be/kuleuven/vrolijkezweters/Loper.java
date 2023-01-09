@@ -9,8 +9,7 @@ public class Loper {
     private float TotaleAfstand;
 
 
-    public int getLoperId() {return LoperId;
-    }
+    public int getLoperId() {return LoperId;}
     public String getNaam() {
         return Naam;
     }

@@ -37,6 +37,7 @@ public class BeheerWedstrijdenController {
     @FXML
     private TableView tblConfigs;
 
+    private List<Wedstrijden> list;
     public void initialize() {
         initTable();
         btnAdd.setOnAction(e -> addNewRow());
@@ -64,7 +65,7 @@ public class BeheerWedstrijdenController {
 
         databaseConnection databaseConnection = new databaseConnection();
         Handle handle = databaseConnection.getJdbi().open();
-        List<Wedstrijden> list = handle.createQuery("SELECT * FROM wedstrijden").mapToBean(Wedstrijden.class).list();
+        list = handle.createQuery("SELECT * FROM wedstrijden").mapToBean(Wedstrijden.class).list();
 
         int colIndex = 0;
         for(var colName : new String[]{"WedstrijdId", "Afstand", "Aantal etappes", "Inschrijvingsgeld", "Datum", "Locatie"}) {
@@ -78,13 +79,9 @@ public class BeheerWedstrijdenController {
         for(int i = 0; i < list.size(); i++) {
             Wedstrijden wedstrijden = list.get(i);
 
-            tblConfigs.getItems().add(FXCollections.observableArrayList(wedstrijden.getWedstijdId() + "", wedstrijden.getAfstand()+ "", wedstrijden.getAantalEtappes()+ "", wedstrijden.getInschrijvingsgeld()+ "", wedstrijden.getDatum() + "", wedstrijden.getLocatie() + ""));
+            tblConfigs.getItems().add(FXCollections.observableArrayList(wedstrijden.getWedstrijdId() + "", wedstrijden.getAfstand()+ "", wedstrijden.getAantalEtappes()+ "", wedstrijden.getInschrijvingsgeld()+ "", wedstrijden.getDatum() + "", wedstrijden.getLocatie() + ""));
         }
         handle.close();
-    }
-
-    public void publicInitTable(){
-        initTable();
     }
     private void addNewRow() {
 
@@ -109,27 +106,22 @@ public class BeheerWedstrijdenController {
 
     private void deleteCurrentRow() {
         int geselecteerdeRij = tblConfigs.getSelectionModel().getSelectedIndex();
-        System.out.println("Geselecteerde rij is rij " +geselecteerdeRij);
 
         databaseConnection databaseConnection = new databaseConnection();
         Handle handle = databaseConnection.getJdbi().open();
 
+        int id = list.get(geselecteerdeRij).getWedstrijdId();
 
-        // SQL statement die de WedstrijdId laat zien van geselecteerdeRij
-        String SQL_getWedstrijdId = "SELECT WedstrijdId FROM Wedstrijden LIMIT 1 OFFSET "+geselecteerdeRij;
-        int resultaat = handle.execute(SQL_getWedstrijdId);
-        // Probleem hier is dat er voor elke WedstrijdId -1 wordt teruggegeven, zoals deze println laat zien
-        System.out.println(resultaat);
+        String SQL_deleteWedstrijd = "DELETE from wedstrijden WHERE wedstrijdid = " + id;
+        String SQL_deleteteEtappes = "DELETE from Etappe WHERE wedstrijdid = " + id;
 
-        // Als de juiste WestrijdId wordt teruggegeven --> rij met deze WedstrijdId verwijderen
-        // Ook problemen met foreign keys wanneer ik rij probeer te verwijderen in DB Browser
-
-
-        /* Iets als dit proberen:
-        String SQL2 = "DELETE FROM Wedstrijden WHERE WedstrijdId IN (SELECT WedstrijdId FROM Wedstrijden LIMIT 1 OFFSET 1)";
-        */
+        handle.execute(SQL_deleteteEtappes);
+        handle.execute(SQL_deleteWedstrijd);
 
         handle.close();
+
+        ObservableList<Wedstrijden> data = tblConfigs.getItems();
+        data.remove(geselecteerdeRij);
     }
 
     private void modifyCurrentRow() {

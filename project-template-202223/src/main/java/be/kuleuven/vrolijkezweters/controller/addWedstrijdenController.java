@@ -55,10 +55,10 @@ public class addWedstrijdenController {
         var stage = (Stage) addId.getScene().getWindow();
         stage.close();
 
-        refreshPreviousStage();
+        refreshPreviousScene();
     }
 
-    private void refreshPreviousStage(){
+    private void refreshPreviousScene(){
         var resourceName = "beheerwedstrijden.fxml";
         try {
             var stage = new Stage();
