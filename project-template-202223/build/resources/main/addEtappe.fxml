@@ -7,11 +7,15 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="be.kuleuven.vrolijkezweters.controller.addEtappeController">
    <children>
-      <TextField fx:id="BeginLocatie" layoutX="212.0" layoutY="97.0" prefHeight="36.0" prefWidth="265.0" />
-      <TextField fx:id="EindLocatie" layoutX="212.0" layoutY="164.0" prefHeight="36.0" prefWidth="265.0" />
-      <Text layoutX="85.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Beginlocatie:" />
-      <Text layoutX="85.0" layoutY="187.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Eindlocatie:" />
-      <Button fx:id="addEtappe" layoutX="281.0" layoutY="276.0" mnemonicParsing="false" text="Add" />
-      <Text fx:id="etappeText" layoutX="270.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Etappe 1" />
+      <TextField fx:id="WedstrijdId" layoutX="212.0" layoutY="42.0" prefHeight="36.0" prefWidth="265.0" />
+      <TextField fx:id="EtappeNummer" layoutX="212.0" layoutY="94.0" prefHeight="36.0" prefWidth="265.0" />
+      <TextField fx:id="BeginLocatie" layoutX="212.0" layoutY="145.0" prefHeight="36.0" prefWidth="265.0" />
+      <TextField fx:id="EindLocatie" layoutX="212.0" layoutY="195.0" prefHeight="36.0" prefWidth="265.0" />
+      <Text layoutX="85.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WedstrijdId:" />
+      <Text layoutX="85.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Etappenummer:" />
+      <Text layoutX="85.0" layoutY="168.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Beginlocatie:" />
+      <Text layoutX="85.0" layoutY="218.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Eindlocatie:" />
+      <Button fx:id="addEtappe" layoutX="281.0" layoutY="274.0" mnemonicParsing="false" text="Add" />
+      <Button fx:id="btnCloseAddEtappe" layoutX="426.0" layoutY="274.0" mnemonicParsing="false" text="Close" />
    </children>
 </AnchorPane>
