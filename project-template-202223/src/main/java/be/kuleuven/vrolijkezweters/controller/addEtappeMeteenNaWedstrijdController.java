@@ -60,8 +60,8 @@ public class addEtappeMeteenNaWedstrijdController {
             refreshPreviousScene();
         } else {
             etappeText2.setText("Etappe " + (i + 1));
-            i++;
             handle.execute("INSERT INTO etappe (wedstrijdId, etappeNummer, beginLocatie, eindLocatie, etappeAfstand) VALUES (?, ?, ?, ?, ?)", wedstrijdId, i, beginLocatie, eindLocatie, etappeAfstand);
+            i++;
             BeginLocatie2.clear();
             EindLocatie2.clear();
         }

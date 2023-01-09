@@ -42,6 +42,7 @@ public class addEtappeController {
     }
     private void addEtappe() {
 
+        int wedstrijdId = Integer.parseInt(WedstrijdId.getText());
         float etappeNummer = Integer.parseInt(EtappeNummer.getText());
         float beginLocatie = Float.parseFloat(BeginLocatie.getText());
         float eindLocatie = Float.parseFloat(EindLocatie.getText());
@@ -52,8 +53,8 @@ public class addEtappeController {
 
         list = handle.createQuery("SELECT * FROM wedstrijden ORDER BY wedstrijdid DESC LIMIT 1").mapToBean(Wedstrijden.class).list();
 
-        int wedstrijdId = list.get(0).getWedstrijdId();
-        int aantalEtappes = Integer.parseInt(list.get(0).getAantalEtappes());
+        //int wedstrijdId = list.get(0).getWedstrijdId();
+        //int aantalEtappes = Integer.parseInt(list.get(0).getAantalEtappes());
 
         var stage = (Stage) addEtappe.getScene().getWindow();
 
