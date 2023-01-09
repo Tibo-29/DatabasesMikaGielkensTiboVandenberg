@@ -120,6 +120,8 @@ public class BeheerLopersController {
 
         handle.close();
 
+        ObservableList<Loper> data = tblConfigs2.getItems();
+        data.remove(geselecteerdeRij);
     }
 
     private void modifyCurrentRow() {

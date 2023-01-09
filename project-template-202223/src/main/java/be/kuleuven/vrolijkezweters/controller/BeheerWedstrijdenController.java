@@ -1,5 +1,6 @@
 package be.kuleuven.vrolijkezweters.controller;
 
+import be.kuleuven.vrolijkezweters.Loper;
 import be.kuleuven.vrolijkezweters.ProjectMain;
 import be.kuleuven.vrolijkezweters.Wedstrijden;
 import be.kuleuven.vrolijkezweters.databaseConnection;
@@ -56,11 +57,13 @@ public class BeheerWedstrijdenController {
         btnEtappe.setOnAction(event -> showEtappeBeheerscherm());
     }
 
-    public TableView getConfic(){return tblConfigs;}
     private void initTable() {
 
         tblConfigs.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         tblConfigs.getColumns().clear();
+
+        /*ObservableList<Wedstrijden> data = tblConfigs.getItems();
+        data.clear();*/
 
         databaseConnection databaseConnection = new databaseConnection();
         Handle handle = databaseConnection.getJdbi().open();
@@ -83,6 +86,9 @@ public class BeheerWedstrijdenController {
         handle.close();
     }
 
+    public void publicInitTable(){
+        initTable();
+    }
     private void addNewRow() {
 
         var resourceName = "addWedstrijden.fxml";

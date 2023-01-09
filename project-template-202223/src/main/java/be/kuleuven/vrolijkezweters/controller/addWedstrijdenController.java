@@ -1,10 +1,15 @@
 package be.kuleuven.vrolijkezweters.controller;
 
+import be.kuleuven.vrolijkezweters.Loper;
 import be.kuleuven.vrolijkezweters.Wedstrijden;
+import be.kuleuven.vrolijkezweters.controller.BeheerWedstrijdenController;
 import be.kuleuven.vrolijkezweters.databaseConnection;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import org.jdbi.v3.core.Handle;
 
 public class addWedstrijdenController {
@@ -26,8 +31,8 @@ public class addWedstrijdenController {
         addId.setOnAction(e -> addWedstrijd());
     }
     private void addWedstrijd() {
+        BeheerWedstrijdenController wedstrijdenController = new BeheerWedstrijdenController();
 
-        int wedstrijdid = 6;
         float afstand = Float.parseFloat(afstandId.getText());
         String aantalEtappes = aantalEtappesId.getText().toString();
         float inschrijvingsgeld = Float.parseFloat(inschrijvingsgeldId.getText());
@@ -40,6 +45,9 @@ public class addWedstrijdenController {
         handle.execute("INSERT INTO wedstrijden (afstand, aantaletappes, inschrijvingsgeld, datum, locatie) VALUES (?, ?, ?, ?, ?)", afstand, aantalEtappes, inschrijvingsgeld, datum, locatie);
 
         handle.close();
+
+        var stage = (Stage) addId.getScene().getWindow();
+        stage.close();
     }
 
 }
