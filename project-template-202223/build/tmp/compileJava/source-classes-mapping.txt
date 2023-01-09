@@ -8,8 +8,8 @@ be/kuleuven/vrolijkezweters/controller/addLoperController.java
  be.kuleuven.vrolijkezweters.controller.addLoperController
 be/kuleuven/vrolijkezweters/controller/BeheerPersoneelController.java
  be.kuleuven.vrolijkezweters.controller.BeheerPersoneelController
-be/kuleuven/vrolijkezweters/controller/BeheerLopersController.java
- be.kuleuven.vrolijkezweters.controller.BeheerLopersController
+be/kuleuven/vrolijkezweters/Wedstrijden.java
+ be.kuleuven.vrolijkezweters.Wedstrijden
 be/kuleuven/vrolijkezweters/controller/addPersoneelController.java
  be.kuleuven.vrolijkezweters.controller.addPersoneelController
 be/kuleuven/vrolijkezweters/databaseConnection.java
@@ -28,5 +28,5 @@ be/kuleuven/vrolijkezweters/Loper.java
  be.kuleuven.vrolijkezweters.Loper
 be/kuleuven/vrolijkezweters/ProjectMain.java
  be.kuleuven.vrolijkezweters.ProjectMain
-be/kuleuven/vrolijkezweters/Wedstrijden.java
- be.kuleuven.vrolijkezweters.Wedstrijden
+be/kuleuven/vrolijkezweters/controller/BeheerLopersController.java
+ be.kuleuven.vrolijkezweters.controller.BeheerLopersController
