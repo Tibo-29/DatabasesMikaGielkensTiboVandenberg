@@ -36,9 +36,9 @@ public class BeheerWedstrijdenController {
     private Button btnEtappe;
     @FXML
     private TableView tblConfigs;
-
     private List<Wedstrijden> list;
     public void initialize() {
+
         initTable();
         btnAdd.setOnAction(e -> addNewRow());
         btnModify.setOnAction(e -> {
@@ -124,7 +124,10 @@ public class BeheerWedstrijdenController {
         data.remove(geselecteerdeRij);
     }
 
-    private void modifyCurrentRow() {
+    public void modifyCurrentRow() {
+        //int geselecteerdeRij = tblConfigs.getSelectionModel().getSelectedIndex();
+        //int id = list.get(geselecteerdeRij).getWedstrijdId();
+        showWijzigWedstrijdenScherm();
     }
 
     public void showAlert(String title, String content) {
@@ -149,6 +152,29 @@ public class BeheerWedstrijdenController {
             var scene = new Scene(root);
             stage.setScene(scene);
             stage.setTitle("Admin Etappe");
+            stage.initOwner(ProjectMain.getRootStage());
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.show();
+
+        } catch (Exception e) {
+            throw new RuntimeException("Kan beheerscherm " + resourceName + " niet vinden", e);
+        }
+    }
+
+    private void showWijzigWedstrijdenScherm() {
+        var resourceName = "wijzigWedstrijd.fxml";
+        try {
+            var stage = new Stage();
+
+            //var stage2 = (Stage) btnModify.getScene().getWindow();
+            int geselecteerdeRij = tblConfigs.getSelectionModel().getSelectedIndex();
+            int id = list.get(geselecteerdeRij).getWedstrijdId();
+            stage.setUserData(id);
+
+            var root = (AnchorPane) FXMLLoader.load(getClass().getClassLoader().getResource(resourceName));
+            var scene = new Scene(root);
+            stage.setScene(scene);
+            stage.setTitle("Admin wijzig wedstrijd");
             stage.initOwner(ProjectMain.getRootStage());
             stage.initModality(Modality.WINDOW_MODAL);
             stage.show();
