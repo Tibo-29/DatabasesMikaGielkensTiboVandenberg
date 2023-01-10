@@ -38,6 +38,8 @@ public class BeheerWedstrijdenController {
     private TableView tblConfigs;
     @FXML
     private Button addLoperWedstrijdBtn;
+    @FXML
+    private Button beheerLoperWedstrijdBtn;
 
     private List<Wedstrijden> list;
     public void initialize() {
@@ -59,6 +61,7 @@ public class BeheerWedstrijdenController {
 
         btnEtappe.setOnAction(event -> showEtappeBeheerscherm());
         addLoperWedstrijdBtn.setOnAction(event -> addLoperWedstrijdScene());
+        beheerLoperWedstrijdBtn.setOnAction(event -> beheerLoperWedstrijd());
     }
 
     private void initTable() {
@@ -174,6 +177,28 @@ public class BeheerWedstrijdenController {
 
             stage.setScene(scene);
             stage.setTitle("Voeg lopers toe aan wedstrijd met id: " + id);
+            stage.initOwner(ProjectMain.getRootStage());
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.show();
+
+        } catch (Exception e) {
+            throw new RuntimeException("Kan beheerscherm " + resourceName + " niet vinden", e);
+        }
+    }
+
+    private void beheerLoperWedstrijd(){
+        var resourceName = "beheerLopersInWedstrijd.fxml";
+        try {
+            var stage = new Stage();
+            var root = (AnchorPane) FXMLLoader.load(getClass().getClassLoader().getResource(resourceName));
+            var scene = new Scene(root);
+
+            int geselecteerdeRij = tblConfigs.getSelectionModel().getSelectedIndex();
+            int id = list.get(geselecteerdeRij).getWedstrijdId();
+            stage.setUserData(id);
+
+            stage.setScene(scene);
+            stage.setTitle("Beheer lopers in wedstrijd");
             stage.initOwner(ProjectMain.getRootStage());
             stage.initModality(Modality.WINDOW_MODAL);
             stage.show();

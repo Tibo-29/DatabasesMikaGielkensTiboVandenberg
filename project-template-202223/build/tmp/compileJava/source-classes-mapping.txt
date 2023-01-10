@@ -36,3 +36,5 @@ be/kuleuven/vrolijkezweters/loperWedstrijd.java
  be.kuleuven.vrolijkezweters.loperWedstrijd
 be/kuleuven/vrolijkezweters/controller/addLoperWedstrijd.java
  be.kuleuven.vrolijkezweters.controller.addLoperWedstrijd
+be/kuleuven/vrolijkezweters/controller/beheerLopersInWedstrijd.java
+ be.kuleuven.vrolijkezweters.controller.beheerLopersInWedstrijd
