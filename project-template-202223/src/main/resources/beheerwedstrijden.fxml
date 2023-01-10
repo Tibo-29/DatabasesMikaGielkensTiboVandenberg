@@ -25,5 +25,6 @@
       <Button fx:id="btnClose" layoutX="520.0" layoutY="304.0" mnemonicParsing="false" text="Sluiten" />
       <Button fx:id="btnDelete" layoutX="431.0" layoutY="304.0" mnemonicParsing="false" text="Verwijder" />
       <Button fx:id="btnEtappe" layoutX="476.0" layoutY="9.0" mnemonicParsing="false" text="Etappes beheren" />
+      <Button fx:id="addLoperWedstrijdBtn" layoutX="198.0" layoutY="304.0" mnemonicParsing="false" text="Voeg lopers toe aan deze wedstrijd" />
    </children>
 </AnchorPane>

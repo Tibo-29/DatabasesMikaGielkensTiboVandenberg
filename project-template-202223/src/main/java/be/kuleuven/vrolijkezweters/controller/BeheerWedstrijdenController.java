@@ -36,6 +36,8 @@ public class BeheerWedstrijdenController {
     private Button btnEtappe;
     @FXML
     private TableView tblConfigs;
+    @FXML
+    private Button addLoperWedstrijdBtn;
 
     private List<Wedstrijden> list;
     public void initialize() {
@@ -56,6 +58,7 @@ public class BeheerWedstrijdenController {
         });
 
         btnEtappe.setOnAction(event -> showEtappeBeheerscherm());
+        addLoperWedstrijdBtn.setOnAction(event -> addLoperWedstrijdScene());
     }
 
     private void initTable() {
@@ -105,11 +108,11 @@ public class BeheerWedstrijdenController {
     }
 
     private void deleteCurrentRow() {
-        int geselecteerdeRij = tblConfigs.getSelectionModel().getSelectedIndex();
 
         databaseConnection databaseConnection = new databaseConnection();
         Handle handle = databaseConnection.getJdbi().open();
 
+        int geselecteerdeRij = tblConfigs.getSelectionModel().getSelectedIndex();
         int id = list.get(geselecteerdeRij).getWedstrijdId();
 
         String SQL_deleteWedstrijd = "DELETE from wedstrijden WHERE wedstrijdid = " + id;
@@ -149,6 +152,28 @@ public class BeheerWedstrijdenController {
             var scene = new Scene(root);
             stage.setScene(scene);
             stage.setTitle("Admin Etappe");
+            stage.initOwner(ProjectMain.getRootStage());
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.show();
+
+        } catch (Exception e) {
+            throw new RuntimeException("Kan beheerscherm " + resourceName + " niet vinden", e);
+        }
+    }
+
+    private void addLoperWedstrijdScene() {
+        var resourceName = "addLoperWedstrijd.fxml";
+        try {
+            var stage = new Stage();
+            var root = (AnchorPane) FXMLLoader.load(getClass().getClassLoader().getResource(resourceName));
+            var scene = new Scene(root);
+
+            int geselecteerdeRij = tblConfigs.getSelectionModel().getSelectedIndex();
+            int id = list.get(geselecteerdeRij).getWedstrijdId();
+            stage.setUserData(id);
+
+            stage.setScene(scene);
+            stage.setTitle("Voeg lopers toe aan wedstrijd met id: " + id);
             stage.initOwner(ProjectMain.getRootStage());
             stage.initModality(Modality.WINDOW_MODAL);
             stage.show();
